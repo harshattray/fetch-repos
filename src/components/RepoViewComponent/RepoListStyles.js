@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-30T17:06:27+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-04-30T22:55:32+05:30
+ * @Last modified time: 2019-05-01T01:42:45+05:30
  */
 
 import styled from "styled-components";
@@ -24,5 +24,12 @@ export default styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 10px 0 0 10px;
+  }
+  .repo-sort-filter {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px 0;
   }
 `;

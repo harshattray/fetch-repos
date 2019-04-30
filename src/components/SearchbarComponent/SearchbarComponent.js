@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-28T15:49:34+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-04-30T22:07:30+05:30
+ * @Last modified time: 2019-04-30T23:20:12+05:30
  */
 import React, { Fragment, Component } from "react";
 import {
@@ -40,12 +40,12 @@ class SearchbarComponent extends Component {
         <SearchBarStyles>
           <div className="project-container">
             <InputComponent />
+            {repoListStack ? (
+              <RepoViewComponent />
+            ) : (
+              <p>Repo results will appear here</p>
+            )}
           </div>
-          {repoListStack ? (
-            <RepoViewComponent />
-          ) : (
-            <p>Repo results will appear here</p>
-          )}
         </SearchBarStyles>
       </Fragment>
     );
