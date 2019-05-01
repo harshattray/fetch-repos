@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-29T17:54:40+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T03:39:12+05:30
+ * @Last modified time: 2019-05-02T04:43:37+05:30
  */
 
 import {
@@ -72,7 +72,8 @@ export default (state = initial_state, action) => {
       return {
         ...state,
         fetchFail: action.payload.response.data.message,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        repoOrgName: null
       };
     default:
       return state;
