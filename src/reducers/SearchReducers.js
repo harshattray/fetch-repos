@@ -2,13 +2,14 @@
  * @Author: harsha
  * @Date:   2019-04-29T17:54:40+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-01T22:51:58+05:30
+ * @Last modified time: 2019-05-02T02:08:43+05:30
  */
 
 import {
   GET_SEARCH_RESULTS,
   SET_SORT_VALUE,
-  SET_FILTER_LANGUAGE
+  SET_FILTER_LANGUAGE,
+  GET_BRANCH_DETAILS
 } from "../actions/types";
 import {
   sortedRepoBuilder,
@@ -16,7 +17,11 @@ import {
   filteredLanguageStack
 } from "../helpers/Reducerhelpers";
 
-export default (state = [], action) => {
+const initial_state = {
+  isFetching: true
+};
+
+export default (state = initial_state, action) => {
   switch (action.type) {
     case GET_SEARCH_RESULTS:
       return {
@@ -40,6 +45,18 @@ export default (state = [], action) => {
           action.repoStack,
           action.languageFilter
         )
+      };
+    case GET_BRANCH_DETAILS:
+      return {
+        ...state,
+        branchData: action.payload.data,
+        isFetching: action.isFetching,
+        repoName: action.repoName
+      };
+    case "FETCHING_DATA":
+      return {
+        ...state,
+        isFetching: action.isFetching
       };
     default:
       return state;

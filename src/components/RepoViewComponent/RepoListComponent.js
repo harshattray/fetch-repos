@@ -2,16 +2,21 @@
  * @Author: harsha
  * @Date:   2019-04-30T16:40:21+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-01T22:58:31+05:30
+ * @Last modified time: 2019-05-02T00:46:09+05:30
  */
 
 import React, { Fragment, Component } from "react";
-import { Card, Feed, Icon } from "semantic-ui-react";
+import { Card, Feed, Icon, Button, Label } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 import moment from "moment";
 
-export default class RepoListComponent extends Component {
+class RepoListComponent extends Component {
+  cickToViewBranches = (history, orgName, repoName) => () => {
+    history.push(`/repos/${orgName}/${repoName}/branches`);
+  };
   render() {
-    const { gridData } = this.props;
+    const { gridData, history, repoOwnerName } = this.props;
+    console.log(history, "wtf");
     return (
       <Fragment>
         <div className="repo-card-section">
@@ -67,6 +72,25 @@ export default class RepoListComponent extends Component {
                   </Feed.Content>
                 </Feed.Event>
               </Feed>
+              <Card.Content extra>
+                <Button
+                  as="div"
+                  labelPosition="right"
+                  onClick={this.cickToViewBranches(
+                    history,
+                    repoOwnerName,
+                    gridData.name
+                  )}
+                >
+                  <Button basic color="blue">
+                    <Icon name="fork" />
+                    View
+                  </Button>
+                  <Label as="a" basic color="blue" pointing="left">
+                    Branches
+                  </Label>
+                </Button>
+              </Card.Content>
             </Card.Content>
           </Card>
         </div>
@@ -74,3 +98,5 @@ export default class RepoListComponent extends Component {
     );
   }
 }
+
+export default withRouter(RepoListComponent);

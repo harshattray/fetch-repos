@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-17T23:57:06+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-04-30T14:57:08+05:30
+ * @Last modified time: 2019-05-01T23:40:25+05:30
  */
 
 import React, { Fragment, Component } from "react";
@@ -42,7 +42,11 @@ class InputComponent extends Component {
           label="Enter Org Name"
           className="column"
         />
-        <Button className="search" disabled={invalid} loading={submitting}>
+        <Button
+          className="search-button"
+          disabled={invalid}
+          loading={submitting}
+        >
           Search
         </Button>
       </form>

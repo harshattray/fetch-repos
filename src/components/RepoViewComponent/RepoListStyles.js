@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-30T17:06:27+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-01T01:42:45+05:30
+ * @Last modified time: 2019-05-01T23:36:41+05:30
  */
 
 import styled from "styled-components";
@@ -30,6 +30,12 @@ export default styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 10px 0;
+  }
+  .repo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin: 10px 0;
   }
 `;

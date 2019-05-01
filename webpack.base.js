@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-28T04:25:27+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-04-29T17:42:13+05:30
+ * @Last modified time: 2019-05-02T01:12:34+05:30
  */
 
 const webpack = require("webpack");
@@ -89,6 +89,9 @@ module.exports = {
         use: ["url-loader?limit=100000"]
       }
     ]
+  },
+  devServer: {
+    historyApiFallback: true
   },
   resolve: {
     modules: ["node_modules", path.join("test"), path.join("src")],
