@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { Button } from "semantic-ui-react";
 import { reduxForm, Field, reset } from "redux-form";
 import { renderInputFields } from "../renderInputFieldComponent/renderInputFieldComponent";
-import { fetchDropdownValues } from "../../actions/SearchActions";
+import { fetchRepoData } from "../../actions/SearchActions";
 import { validate } from "../../helpers/validate";
 
 /**
@@ -21,7 +21,7 @@ import { validate } from "../../helpers/validate";
 
 class InputComponent extends Component {
   dispatchRepoRequest = data => {
-    this.props.fetchDropdownValues(data);
+    this.props.fetchRepoData(data);
   };
 
   render() {
@@ -55,7 +55,7 @@ class InputComponent extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchDropdownValues }, dispatch);
+  return bindActionCreators({ fetchRepoData }, dispatch);
 }
 
 const afterSubmitdata = (result, dispatch) => dispatch(reset("repoSearchForm"));

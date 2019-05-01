@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-28T15:49:34+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-01T23:37:20+05:30
+ * @Last modified time: 2019-05-02T03:37:56+05:30
  */
 import React, { Fragment, Component } from "react";
 import {
@@ -12,7 +12,9 @@ import {
   Input,
   Segment,
   Header,
-  Image
+  Image,
+  Dimmer,
+  Loader
 } from "semantic-ui-react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -23,7 +25,13 @@ import "react-bootstrap-typeahead/css/Typeahead.css";
 
 class SearchbarComponent extends Component {
   render() {
-    const { repoListStack, repoOwnerName, repoOwnerImage } = this.props;
+    const {
+      repoListStack,
+      repoOwnerName,
+      repoOwnerImage,
+      isLoading,
+      fetchFail
+    } = this.props;
     return (
       <Fragment>
         {repoOwnerName ? (
@@ -42,8 +50,18 @@ class SearchbarComponent extends Component {
             <InputComponent />
           </div>
           <div className="project-container">
-            {repoListStack ? (
+            {fetchFail ? (
+              <p className="form-grid">
+                No Such Organisations found. Please try a different name
+              </p>
+            ) : repoListStack ? (
               <RepoViewComponent />
+            ) : isLoading ? (
+              <Segment>
+                <Dimmer active inverted>
+                  <Loader size="huge">Loading</Loader>
+                </Dimmer>
+              </Segment>
             ) : (
               <p className="form-grid">Repo results will appear here</p>
             )}
@@ -58,7 +76,9 @@ function mapStateToProps({ repoStack }) {
   return {
     repoListStack: repoStack.repoList,
     repoOwnerName: repoStack.repoOrgName,
-    repoOwnerImage: repoStack.repoAvatar
+    repoOwnerImage: repoStack.repoAvatar,
+    isLoading: repoStack.isLoading,
+    fetchFail: repoStack.fetchFail
   };
 }
 

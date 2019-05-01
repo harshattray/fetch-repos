@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-05-02T00:04:24+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T02:39:23+05:30
+ * @Last modified time: 2019-05-02T03:02:13+05:30
  */
 
 import React, { Component, Fragment } from "react";
@@ -68,7 +68,7 @@ const RenderBranchList = ({ repos, repoName, repoOrgName }) => {
                 <Feed.Content>
                   <Feed.Summary>
                     <Icon name="code" color="blue" />
-                    Repo Name: {repoName.name}
+                    Repo Name: {repoName}
                   </Feed.Summary>
                 </Feed.Content>
               </Feed.Event>

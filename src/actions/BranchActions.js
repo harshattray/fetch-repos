@@ -2,22 +2,18 @@
  * @Author: harsha
  * @Date:   2019-05-02T00:49:01+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T02:16:56+05:30
+ * @Last modified time: 2019-05-02T03:22:50+05:30
  */
 
-import { GET_BRANCH_DETAILS } from "./types";
+import { GET_BRANCH_DETAILS, FETCHING_DATA } from "./types";
 import qs from "qs";
 import axios from "axios";
-
-const config = {
-  headers: { "content-type": "application/x-www-form-urlencoded" }
-};
 
 export const getBranchDetails = (repoOrgName, repoName) => async (
   dispatch,
   getState
 ) => {
-  dispatch(initialCategoryData());
+  dispatch(initialBranchData());
   try {
     const res = await axios.get(
       `https://api.github.com/repos/${repoOrgName}/${repoName}/branches?per_page=1000`
@@ -33,9 +29,9 @@ export const getBranchDetails = (repoOrgName, repoName) => async (
   }
 };
 
-function initialCategoryData() {
+function initialBranchData() {
   return {
-    type: "FETCHING_DATA",
+    type: FETCHING_DATA,
     isFetching: true
   };
 }

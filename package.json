@@ -23,8 +23,9 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open --port 3001 --config webpack.dev.js",
+    "clean": "rm -rf deploy",
     "prod": "npm install --dev && npm run build",
-    "build": "npm run clean && webpack --config webpack.prod.js",
+    "build": "webpack --config webpack.prod.js",
     "commit_deploy": "git add deploy -A && git commit -m \"deploy files at `date`\" -n > /dev/null 2>&1; exit 0",
     "ghpages": "git subtree split --prefix deploy/ -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages",
     "deploy": "npm run build && npm run commit_deploy && npm run ghpages",
