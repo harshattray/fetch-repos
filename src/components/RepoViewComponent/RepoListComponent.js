@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-30T16:40:21+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-04-30T22:55:26+05:30
+ * @Last modified time: 2019-05-01T22:58:31+05:30
  */
 
 import React, { Fragment, Component } from "react";
@@ -12,7 +12,6 @@ import moment from "moment";
 export default class RepoListComponent extends Component {
   render() {
     const { gridData } = this.props;
-    console.log(gridData, "grid Props");
     return (
       <Fragment>
         <div className="repo-card-section">

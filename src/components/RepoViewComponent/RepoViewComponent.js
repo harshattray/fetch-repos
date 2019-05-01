@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-30T14:59:04+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-01T03:06:20+05:30
+ * @Last modified time: 2019-05-01T22:54:09+05:30
  */
 import React, { Fragment, Component } from "react";
 import { bindActionCreators } from "redux";
@@ -11,6 +11,7 @@ import RepoListStyles from "./RepoListStyles";
 import RepoListComponent from "../RepoViewComponent/RepoListComponent";
 import { Dropdown } from "semantic-ui-react";
 import SortComponent from "../SortComponent/SortComponent";
+import FilterComponent from "../FilterComponent/FilterComponent";
 import { sortOptns } from "./SortConstants";
 
 class RepoViewComponent extends Component {
@@ -27,7 +28,10 @@ class RepoViewComponent extends Component {
       handleSubmit,
       invalid,
       submitting,
-      selectedOption
+      selectedOption,
+      selectedFilterLanguage,
+      languagesOptions,
+      filteredRepos
     } = this.props;
     return (
       <Fragment>
@@ -41,7 +45,28 @@ class RepoViewComponent extends Component {
               options={sortOptns}
             />
           </div>
-          <div className="list-view">{this.repoGrid(repoListStack)}</div>
+          <div className="repo-sort-filter">
+            <FilterComponent
+              name="Filter"
+              placeholder={
+                selectedFilterLanguage
+                  ? selectedFilterLanguage
+                  : "Filter based on  language"
+              }
+              label="Filter based on language"
+              defaultValue={
+                selectedFilterLanguage
+                  ? selectedFilterLanguage
+                  : languagesOptions[0]
+              }
+              options={languagesOptions}
+            />
+          </div>
+          {filteredRepos ? (
+            <div className="list-view">{this.repoGrid(filteredRepos)}</div>
+          ) : (
+            <div className="list-view">{this.repoGrid(repoListStack)}</div>
+          )}
         </RepoListStyles>
       </Fragment>
     );
@@ -51,7 +76,10 @@ class RepoViewComponent extends Component {
 function mapStateToProps({ repoStack }) {
   return {
     repoListStack: repoStack.repoList,
-    selectedOption: repoStack.selectedValue
+    filteredRepos: repoStack.filteredRepoList,
+    selectedOption: repoStack.selectedValue,
+    selectedFilterLanguage: repoStack.selectedLanguage,
+    languagesOptions: repoStack.languagesStack
   };
 }
 

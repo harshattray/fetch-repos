@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-05-01T00:20:25+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-01T02:11:17+05:30
+ * @Last modified time: 2019-05-01T22:58:05+05:30
  */
 /* global  */
 import React, { Fragment, Component } from "react";
@@ -18,7 +18,6 @@ class SortComponent extends Component {
 
   render() {
     const { options, placeholder, selectedOption, defaultValue } = this.props;
-    console.log(selectedOption, "selected");
     return (
       <Select
         defaultValue={defaultValue}
