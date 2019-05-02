@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-28T15:49:34+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T03:37:56+05:30
+ * @Last modified time: 2019-05-02T21:53:20+05:30
  */
 import React, { Fragment, Component } from "react";
 import {
@@ -50,18 +50,18 @@ class SearchbarComponent extends Component {
             <InputComponent />
           </div>
           <div className="project-container">
-            {fetchFail ? (
-              <p className="form-grid">
-                No Such Organisations found. Please try a different name
-              </p>
-            ) : repoListStack ? (
-              <RepoViewComponent />
-            ) : isLoading ? (
+            {isLoading ? (
               <Segment>
                 <Dimmer active inverted>
                   <Loader size="huge">Loading</Loader>
                 </Dimmer>
               </Segment>
+            ) : fetchFail ? (
+              <p className="form-grid">
+                No Such Organisations found. Please try a different name
+              </p>
+            ) : repoListStack ? (
+              <RepoViewComponent />
             ) : (
               <p className="form-grid">Repo results will appear here</p>
             )}

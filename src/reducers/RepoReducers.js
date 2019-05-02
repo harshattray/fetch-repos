@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-29T17:54:40+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T03:39:12+05:30
+ * @Last modified time: 2019-05-03T01:51:01+05:30
  */
 
 import {
@@ -12,16 +12,23 @@ import {
   GET_BRANCH_DETAILS,
   FETCHING_DATA,
   INIT_SEARCH_REQUEST,
-  SEARCH_RESULTS_FAIL
+  SEARCH_RESULTS_FAIL,
+  PAGE_CHANGE_TRIGGERED
 } from "../actions/types";
 import {
   sortedRepoBuilder,
   buildLanguageStack,
-  filteredLanguageStack
+  filteredLanguageStack,
+  setTotalPages
 } from "../helpers/Reducerhelpers";
 
 const initial_state = {
-  isFetching: true
+  isFetching: true,
+  paginationStack: {
+    page: 0,
+    totalPages: 0,
+    limit: 10
+  }
 };
 
 export default (state = initial_state, action) => {
@@ -34,13 +41,26 @@ export default (state = initial_state, action) => {
         repoAvatar: action.payload.data[0].owner.avatar_url,
         languagesStack: buildLanguageStack(action.payload.data),
         fetchFail: null,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        paginationStack: {
+          ...state.paginationStack,
+          page: 0,
+          totalPages: setTotalPages(
+            action.payload.data.length,
+            state.paginationStack.limit
+          )
+        },
+        filteredRepoList: null,
+        selectedLanguage: null
       };
     case SET_SORT_VALUE:
       return {
         ...state,
         selectedValue: action.sortValue,
-        repoList: sortedRepoBuilder(state.repoList, action.sortValue)
+        repoList: sortedRepoBuilder(state.repoList, action.sortValue),
+        filteredRepoList: state.filteredRepoList
+          ? sortedRepoBuilder(state.filteredRepoList, action.sortValue)
+          : null
       };
     case SET_FILTER_LANGUAGE:
       return {
@@ -49,7 +69,16 @@ export default (state = initial_state, action) => {
         filteredRepoList: filteredLanguageStack(
           action.repoStack,
           action.languageFilter
-        )
+        ),
+        paginationStack: {
+          ...state.paginationStack,
+          page: 0,
+          totalPages: setTotalPages(
+            filteredLanguageStack(action.repoStack, action.languageFilter)
+              .length,
+            state.paginationStack.limit
+          )
+        }
       };
     case GET_BRANCH_DETAILS:
       return {
@@ -72,7 +101,17 @@ export default (state = initial_state, action) => {
       return {
         ...state,
         fetchFail: action.payload.response.data.message,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        repoOrgName: null
+      };
+    case PAGE_CHANGE_TRIGGERED:
+      return {
+        ...state,
+        isLoading: false,
+        paginationStack: {
+          ...state.paginationStack,
+          page: action.payload
+        }
       };
     default:
       return state;
