@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-30T14:59:04+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T00:43:19+05:30
+ * @Last modified time: 2019-05-03T01:51:36+05:30
  */
 import React, { Fragment, Component } from "react";
 import { bindActionCreators } from "redux";
@@ -12,7 +12,9 @@ import RepoListComponent from "../RepoViewComponent/RepoListComponent";
 import { Dropdown } from "semantic-ui-react";
 import SortComponent from "../SortComponent/SortComponent";
 import FilterComponent from "../FilterComponent/FilterComponent";
+import { pageChangeTrigger } from "../../actions/SelectActions";
 import { sortOptns } from "./SortConstants";
+import ReactPaginate from "react-paginate";
 
 class RepoViewComponent extends Component {
   repoGrid = list => {
@@ -27,6 +29,10 @@ class RepoViewComponent extends Component {
     });
   };
 
+  pageChange = data => {
+    this.props.pageChangeTrigger(data.selected);
+  };
+
   render() {
     const {
       repoListStack,
@@ -38,8 +44,22 @@ class RepoViewComponent extends Component {
       selectedFilterLanguage,
       languagesOptions,
       filteredRepos,
-      repoOwnerName
+      repoOwnerName,
+      paginationStack,
+      pageChangeTrigger
     } = this.props;
+
+    const actualIndex = paginationStack.limit * paginationStack.page;
+    const repoListPagination = repoListStack.slice(
+      actualIndex,
+      actualIndex + paginationStack.limit
+    );
+    const filteredrepoListPagination = filteredRepos
+      ? filteredRepos.slice(actualIndex, actualIndex + paginationStack.limit)
+      : null;
+    const totalPages = filteredRepos
+      ? filteredRepos.length / paginationStack.limit
+      : repoListStack.length / paginationStack.limit;
     return (
       <Fragment>
         <RepoListStyles>
@@ -72,11 +92,27 @@ class RepoViewComponent extends Component {
             </div>
           </div>
           {filteredRepos ? (
-            <div className="list-view">{this.repoGrid(filteredRepos)}</div>
+            <div className="list-view">
+              {this.repoGrid(filteredrepoListPagination)}
+            </div>
           ) : (
-            <div className="list-view">{this.repoGrid(repoListStack)}</div>
+            <div className="list-view">{this.repoGrid(repoListPagination)}</div>
           )}
         </RepoListStyles>
+        {totalPages > 1 ? (
+          <ReactPaginate
+            previousLabel="previous"
+            nextLabel="Next"
+            breakClassName="break-me"
+            pageCount={paginationStack.totalPages}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={paginationStack.limit}
+            onPageChange={this.pageChange}
+            containerClassName="pagination"
+            subContainerClassName="pages pagination"
+            activeClassName="active"
+          />
+        ) : null}
       </Fragment>
     );
   }
@@ -89,8 +125,16 @@ function mapStateToProps({ repoStack }) {
     selectedOption: repoStack.selectedValue,
     selectedFilterLanguage: repoStack.selectedLanguage,
     languagesOptions: repoStack.languagesStack,
-    repoOwnerName: repoStack.repoOrgName
+    repoOwnerName: repoStack.repoOrgName,
+    paginationStack: repoStack.paginationStack
   };
 }
 
-export default connect(mapStateToProps)(RepoViewComponent);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ pageChangeTrigger }, dispatch);
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RepoViewComponent);

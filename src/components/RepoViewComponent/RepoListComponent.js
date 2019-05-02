@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-30T16:40:21+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T00:46:09+05:30
+ * @Last modified time: 2019-05-02T23:58:12+05:30
  */
 
 import React, { Fragment, Component } from "react";
@@ -16,7 +16,6 @@ class RepoListComponent extends Component {
   };
   render() {
     const { gridData, history, repoOwnerName } = this.props;
-    console.log(history, "wtf");
     return (
       <Fragment>
         <div className="repo-card-section">
