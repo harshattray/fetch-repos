@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-30T14:59:04+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-03T01:51:36+05:30
+ * @Last modified time: 2019-05-03T16:15:34+05:30
  */
 import React, { Fragment, Component } from "react";
 import { bindActionCreators } from "redux";
@@ -16,7 +16,7 @@ import { pageChangeTrigger } from "../../actions/SelectActions";
 import { sortOptns } from "./SortConstants";
 import ReactPaginate from "react-paginate";
 
-class RepoViewComponent extends Component {
+export class RepoViewComponent extends Component {
   repoGrid = list => {
     return list.map(data => {
       return (
