@@ -28,6 +28,10 @@ Launches the test runner.
 
 Builds the app for production to the `dist` folder
 
+## Screens
+
+<img src="src/screen.png">
+
 #### TODO
 
 - Better test coverage
