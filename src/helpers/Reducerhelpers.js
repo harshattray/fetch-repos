@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-05-01T01:25:41+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-03T01:40:41+05:30
+ * @Last modified time: 2019-05-03T21:51:31+05:30
  */
 
 export const sortedRepoBuilder = (repoList, type) => {

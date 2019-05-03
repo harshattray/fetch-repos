@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-05-02T00:04:24+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-03T21:12:21+05:30
+ * @Last modified time: 2019-05-03T21:58:16+05:30
  */
 
 import React, { Component, Fragment } from "react";
@@ -58,6 +58,13 @@ export class BranchViewComponent extends Component {
 
 const RenderBranchList = ({ repos, repoName, repoOrgName }) => {
   const renderList = repos.map(repodata => {
+    const replaceUrl = url => {
+      url = url.toString();
+      return (url = url.replace(
+        "https://api.github.com/repos/",
+        "https://github.com/"
+      ));
+    };
     return (
       <div className="repo-card-section" key={repodata.commit.sha}>
         <Card>
@@ -79,7 +86,9 @@ const RenderBranchList = ({ repos, repoName, repoOrgName }) => {
                 <Feed.Content>
                   <Feed.Summary>
                     <Icon name="fork" color="yellow" />
-                    Branch Name: {repodata.name}
+                    <a href={replaceUrl(repodata.commit.url)} target="_blank">
+                      Branch Name: {repodata.name}
+                    </a>
                   </Feed.Summary>
                 </Feed.Content>
               </Feed.Event>
