@@ -2,11 +2,10 @@
  * @Author: harsha
  * @Date:   2019-05-02T00:49:01+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T03:22:50+05:30
+ * @Last modified time: 2019-05-03T20:18:31+05:30
  */
 
 import { GET_BRANCH_DETAILS, FETCHING_DATA } from "./types";
-import qs from "qs";
 import axios from "axios";
 
 export const getBranchDetails = (repoOrgName, repoName) => async (
@@ -29,9 +28,9 @@ export const getBranchDetails = (repoOrgName, repoName) => async (
   }
 };
 
-function initialBranchData() {
+export const initialBranchData = () => {
   return {
     type: FETCHING_DATA,
     isFetching: true
   };
-}
+};

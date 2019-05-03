@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-04-29T17:54:40+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-03T01:51:01+05:30
+ * @Last modified time: 2019-05-03T02:12:35+05:30
  */
 
 import {
@@ -51,7 +51,8 @@ export default (state = initial_state, action) => {
           )
         },
         filteredRepoList: null,
-        selectedLanguage: null
+        selectedLanguage: null,
+        selectedValue: "stars"
       };
     case SET_SORT_VALUE:
       return {

@@ -2,7 +2,7 @@
  * @Author: harsha
  * @Date:   2019-05-02T00:04:24+05:30
  * @Last modified by:   harsha
- * @Last modified time: 2019-05-02T03:02:13+05:30
+ * @Last modified time: 2019-05-03T21:12:21+05:30
  */
 
 import React, { Component, Fragment } from "react";
@@ -13,7 +13,7 @@ import BranchViewStyles from "./BranchViewStyles";
 import { Link } from "react-router-dom";
 import { Container, Card, Icon, Feed } from "semantic-ui-react";
 
-class BranchViewContainer extends Component {
+export class BranchViewComponent extends Component {
   componentDidMount() {
     const { match, getBranchDetails } = this.props;
     getBranchDetails(match.params.repoOwnerName, match.params.repositoryName);
@@ -115,4 +115,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BranchViewContainer);
+)(BranchViewComponent);
