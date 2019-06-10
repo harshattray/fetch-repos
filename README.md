@@ -32,6 +32,8 @@ Builds the app for production to the `dist` folder
 
 <img src="src/screen.png">
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1f5e36e6-067a-4fc1-9bc7-b25433ec4c3f/deploy-status)](https://app.netlify.com/sites/heuristic-brown-ebb506/deploys)
+
 #### TODO
 
 - Better test coverage
